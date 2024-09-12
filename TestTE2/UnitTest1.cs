@@ -1,126 +1,135 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TE2;
-namespace TestTE2
+using TE2; // Asegúrate de que este espacio de nombres coincide con el de tu proyecto principal
+
+namespace ListaDobleTest
 {
-    namespace ListaDobleTests
+    [TestClass]
+    public class UnitTest1
     {
-        [TestClass]
-        public class ListaDobleTests
+        private ListaDoble lista = new ListaDoble(); // Inicializa aquí para evitar el aviso CS8618
+
+        // Método que se ejecuta antes de cada prueba
+        [TestInitialize]
+        public void Setup()
         {
-            private ListaDoble lista;
+            lista = new ListaDoble(); // Reinicializa antes de cada prueba
+        }
 
-            [TestInitialize]
-            public void Setup()
-            {
-                lista = new ListaDoble();
-            }
+        [TestMethod]
+        public void TestInsertInOrder()
+        {
+            lista.InsertInOrder(3);
+            lista.InsertInOrder(1);
+            lista.InsertInOrder(2);
 
-            [TestMethod]
-            public void TestInsertInOrder()
-            {
-                lista.InsertInOrder(3);
-                lista.InsertInOrder(1);
-                lista.InsertInOrder(2);
+            Assert.AreEqual(1, lista.DeleteFirst());
+            Assert.AreEqual(2, lista.DeleteFirst());
+            Assert.AreEqual(3, lista.DeleteFirst());
+        }
 
-                Assert.AreEqual(1, lista.DeleteFirst());
-                Assert.AreEqual(2, lista.DeleteFirst());
-                Assert.AreEqual(3, lista.DeleteFirst());
-            }
+        [TestMethod]
+        public void TestDeleteFirst()
+        {
+            lista.InsertInOrder(1);
+            lista.InsertInOrder(2);
+            lista.InsertInOrder(3);
 
-            [TestMethod]
-            public void TestDeleteFirst()
-            {
-                lista.InsertInOrder(1);
-                lista.InsertInOrder(2);
-                lista.InsertInOrder(3);
+            Assert.AreEqual(1, lista.DeleteFirst());
+            Assert.AreEqual(2, lista.DeleteFirst());
+            Assert.AreEqual(3, lista.DeleteFirst());
 
-                int value = lista.DeleteFirst();
-                Assert.AreEqual(1, value);
-                Assert.AreEqual(2, lista.DeleteFirst());
-                Assert.AreEqual(3, lista.DeleteFirst());
-            }
+            // Verifica que la lista esté vacía
+            Assert.ThrowsException<InvalidOperationException>(() => lista.DeleteFirst());
+        }
 
-            [TestMethod]
-            public void TestDeleteLast()
-            {
-                lista.InsertInOrder(1);
-                lista.InsertInOrder(2);
-                lista.InsertInOrder(3);
+        [TestMethod]
+        public void TestDeleteLast()
+        {
+            lista.InsertInOrder(1);
+            lista.InsertInOrder(2);
+            lista.InsertInOrder(3);
 
-                int value = lista.DeleteLast();
-                Assert.AreEqual(3, value);
-                Assert.AreEqual(2, lista.DeleteLast());
-                Assert.AreEqual(1, lista.DeleteLast());
-            }
+            Assert.AreEqual(3, lista.DeleteLast());
+            Assert.AreEqual(2, lista.DeleteLast());
+            Assert.AreEqual(1, lista.DeleteLast());
 
-            [TestMethod]
-            public void TestDeleteValue()
-            {
-                lista.InsertInOrder(1);
-                lista.InsertInOrder(2);
-                lista.InsertInOrder(3);
+            // Verifica que la lista esté vacía
+            Assert.ThrowsException<InvalidOperationException>(() => lista.DeleteLast());
+        }
 
-                bool result = lista.DeleteValue(2);
-                Assert.IsTrue(result);
-                // Dependiendo de la implementación, podrías verificar el estado de la lista de otra manera
-            }
+        [TestMethod]
+        public void TestDeleteValue()
+        {
+            lista.InsertInOrder(1);
+            lista.InsertInOrder(2);
+            lista.InsertInOrder(3);
 
-            [TestMethod]
-            public void TestGetMiddle()
-            {
-                lista.InsertInOrder(1);
-                lista.InsertInOrder(2);
-                lista.InsertInOrder(3);
+            Assert.IsTrue(lista.DeleteValue(2));
+            Assert.IsFalse(lista.DeleteValue(4)); // Valor no existente
+        }
 
-                Assert.AreEqual(2, lista.GetMiddle()); // Ajusta según la lógica de tu método
-            }
+        [TestMethod]
+        public void TestGetMiddle()
+        {
+            // Asegúrate de insertar valores en la lista antes de llamar a GetMiddle
+            lista.InsertInOrder(1);
+            lista.InsertInOrder(2);
+            lista.InsertInOrder(3);
 
-            [TestMethod]
-            public void TestMergeSortedAsc()
-            {
-                ListaDoble listaA = new ListaDoble();
-                listaA.InsertInOrder(1);
-                listaA.InsertInOrder(3);
-                listaA.InsertInOrder(5);
+            // Verificación del valor medio correcto
+            Assert.AreEqual(2, lista.GetMiddle());
 
-                ListaDoble listaB = new ListaDoble();
-                listaB.InsertInOrder(2);
-                listaB.InsertInOrder(4);
-                listaB.InsertInOrder(6);
+            // Eliminar un elemento para probar si el medio cambia correctamente
+            lista.DeleteFirst(); // Remueve el 1
+            Assert.AreEqual(3, lista.GetMiddle());
+        }
 
-                lista.MergeSorted(listaA, listaB, SortDirection.Asc);
 
-                Assert.AreEqual(1, lista.DeleteFirst());
-                Assert.AreEqual(2, lista.DeleteFirst());
-                Assert.AreEqual(3, lista.DeleteFirst());
-                Assert.AreEqual(4, lista.DeleteFirst());
-                Assert.AreEqual(5, lista.DeleteFirst());
-                Assert.AreEqual(6, lista.DeleteFirst());
-            }
+        [TestMethod]
+        public void TestMergeSortedAsc()
+        {
+            ListaDoble listaA = new ListaDoble();
+            listaA.InsertInOrder(1);
+            listaA.InsertInOrder(3);
+            listaA.InsertInOrder(5);
 
-            [TestMethod]
-            public void TestMergeSortedDesc()
-            {
-                ListaDoble listaA = new ListaDoble();
-                listaA.InsertInOrder(1);
-                listaA.InsertInOrder(3);
-                listaA.InsertInOrder(5);
+            ListaDoble listaB = new ListaDoble();
+            listaB.InsertInOrder(2);
+            listaB.InsertInOrder(4);
+            listaB.InsertInOrder(6);
 
-                ListaDoble listaB = new ListaDoble();
-                listaB.InsertInOrder(2);
-                listaB.InsertInOrder(4);
-                listaB.InsertInOrder(6);
+            lista.MergeSorted(listaA, listaB, SortDirection.Asc);
 
-                lista.MergeSorted(listaA, listaB, SortDirection.Desc);
+            Assert.AreEqual(1, lista.DeleteFirst());
+            Assert.AreEqual(2, lista.DeleteFirst());
+            Assert.AreEqual(3, lista.DeleteFirst());
+            Assert.AreEqual(4, lista.DeleteFirst());
+            Assert.AreEqual(5, lista.DeleteFirst());
+            Assert.AreEqual(6, lista.DeleteFirst());
+        }
 
-                Assert.AreEqual(6, lista.DeleteFirst());
-                Assert.AreEqual(5, lista.DeleteFirst());
-                Assert.AreEqual(4, lista.DeleteFirst());
-                Assert.AreEqual(3, lista.DeleteFirst());
-                Assert.AreEqual(2, lista.DeleteFirst());
-                Assert.AreEqual(1, lista.DeleteFirst());
-            }
+        [TestMethod]
+        public void TestMergeSortedDesc()
+        {
+            ListaDoble listaA = new ListaDoble();
+            listaA.InsertInOrder(1);
+            listaA.InsertInOrder(3);
+            listaA.InsertInOrder(5);
+
+            ListaDoble listaB = new ListaDoble();
+            listaB.InsertInOrder(2);
+            listaB.InsertInOrder(4);
+            listaB.InsertInOrder(6);
+
+            lista.MergeSorted(listaA, listaB, SortDirection.Desc);
+
+            // Verificación del orden descendente
+            Assert.AreEqual(6, lista.DeleteFirst());
+            Assert.AreEqual(5, lista.DeleteFirst());
+            Assert.AreEqual(4, lista.DeleteFirst());
+            Assert.AreEqual(3, lista.DeleteFirst());
+            Assert.AreEqual(2, lista.DeleteFirst());
+            Assert.AreEqual(1, lista.DeleteFirst());
         }
     }
-
 }
