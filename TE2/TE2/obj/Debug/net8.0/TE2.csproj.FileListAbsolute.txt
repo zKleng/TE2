@@ -1,0 +1,14 @@
+C:\Users\j2005\source\repos\TE2\TE2\bin\Debug\net8.0\TE2.exe
+C:\Users\j2005\source\repos\TE2\TE2\bin\Debug\net8.0\TE2.deps.json
+C:\Users\j2005\source\repos\TE2\TE2\bin\Debug\net8.0\TE2.runtimeconfig.json
+C:\Users\j2005\source\repos\TE2\TE2\bin\Debug\net8.0\TE2.dll
+C:\Users\j2005\source\repos\TE2\TE2\bin\Debug\net8.0\TE2.pdb
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.AssemblyInfoInputs.cache
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.AssemblyInfo.cs
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.csproj.CoreCompileInputs.cache
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.dll
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\refint\TE2.dll
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.pdb
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\TE2.genruntimeconfig.cache
+C:\Users\j2005\source\repos\TE2\TE2\obj\Debug\net8.0\ref\TE2.dll
